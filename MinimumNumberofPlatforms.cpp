@@ -25,7 +25,6 @@ int main(int argc, char const *argv[])
             j++;
         }
         if(platform > result){
-            cout<<"usefull"<<endl;
             result = platform;
         }
 

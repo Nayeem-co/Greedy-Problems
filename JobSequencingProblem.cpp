@@ -23,7 +23,7 @@ int main(int argc, char const *argv[])
     }
 
     cout<<"enter all deadlines: ";
-    for(int i=0 ;i< n ; i++){
+    for(int i=0 ; i< n ; i++){
         cin>>arr[i].deadline;
     }
     
@@ -38,7 +38,7 @@ int main(int argc, char const *argv[])
         result[i] = 0; 
     }
     
-
+    // sorting the list by profit in decreasing oder
     for(int i=0 ; i < n ; i++){
         for(int j=i+1 ; j < n ; j++){
 

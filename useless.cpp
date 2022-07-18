@@ -1,36 +1,49 @@
+//{ Driver Code Starts
+// Initial Template for C++
+
 #include <bits/stdc++.h>
 using namespace std;
 
+// } Driver Code Ends
+// User function Template for C++
 
-int findPlatform(double arr[], double dep[], int n)
-{
+class Solution{
+public:
+    vector<int> minPartition(int N)
+    {
+        vector<int> v;
+        int arr[10] = { 1, 2, 5, 10, 20, 50, 100, 200, 500, 2000 };
+        int A[10];
+        int j = 0;
+        for(int i=9 ; i>=0 ; i--){
+          A[j] = arr[i];
+          j++;
+        }
+        j = 0;
+        while(N != 0){
+          while (N % A[j] != 0){
+            v.push_back(A[j]);
+            N = N - A[j];
+          }
+          j++;
+        }
+    }
+};
 
-	int plat_needed = 1, result = 1;
-	int i = 1, j = 0;
-
-	for (int i = 0; i < n; i++) {
-		
-		plat_needed = 1;
-
-		for (int j = i + 1; j < n; j++) {
-			// check for overlap
-			if (max(arr[i], arr[j]) <= min(dep[i], dep[j]))
-				plat_needed++;
-		}
-
-		// update result
-		result = max(result, plat_needed);
-	}
-
-	return result;
+//{ Driver Code Starts
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int N;
+        cin>>N;
+        
+        Solution ob;
+        vector<int> numbers = ob.minPartition(N);
+        for(auto u: numbers)
+            cout<<u<<" ";
+        cout<<"\n";
+    }
+    return 0;
 }
-
-// Driver Code
-int main()
-{
-    double arr[] = {9.00, 9.40, 9.50, 11.00, 15.00, 18.00};
-    double dep[] = {9.10, 12.00, 11.20, 11.30, 19.00, 20.00};
-	int n = sizeof(arr) / sizeof(arr[0]);
-	cout << findPlatform(arr, dep, n);
-	return 0;
-}
+// } Driver Code Ends

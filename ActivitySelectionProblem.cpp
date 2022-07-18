@@ -2,11 +2,12 @@
 #include<iostream>
 using namespace std;
 
+//https://www.geeksforgeeks.org/activity-selection-problem-greedy-algo-1/
 
 struct a
 {
-    int x;
-    int y;
+    int start;
+    int end;
     int z;
     int index;
 
@@ -15,40 +16,56 @@ struct a
 
 int main(int argc, char const *argv[])
 {
-    cout<<"enter the number of activities :";
+    
     int n;
+    cout<<"enter the number of activities: ";
     cin>>n;
-    cout<<endl;
-    cout<<"enter the number of activies for the person :";
-    int activities;
-    cin>>activities;
-    cout<<endl;
 
+    cout<<"enter the starting times: ";
     struct a arr[n];
-
     for(int i=0 ; i< n ; i++){
-        cin>>arr[i].x;
+        cin>>arr[i].start;
     }
 
-    for(int i=0 ; i< n ; i++){
-        cin>>arr[i].y;
-        arr[i].z = arr[i].y - arr[i].x;
+    int take[n];
+
+    cout<<"enter the ending time: ";
+    for(int i=0; i< n ; i++){
+        cin>>arr[i].end;
         arr[i].index = i;
     }
 
-    //swap manually
+
+    //sorting the array by ending time
     for(int i=0 ; i< n ; i++){
-        for(int j=0 ; j< n ; j++){
-            if(arr[i].z > arr[i+1].z){
-                swap(arr[i],arr[i+1]);
+        for(int j = i+1 ; j< n ; j++){
+            if(arr[i].end > arr[j].end){
+                swap(arr[i],arr[j]);
             }
         }
     }
 
+    for(int i=0 ; i< n ; i++){
+        if(take[i] != -1){
+            take[i] = 1;
 
-    for(int i=0 ; i< activities ; i++){
-        cout<<arr[i].index<<endl;
+            for(int j=i+1 ; j< n ; j++){
+                if(arr[i].end > arr[j].start){
+                    take[j] = -1;
+                }
+            }
+
+        }
     }
 
-    return 0;
+    cout<<"result: ";
+    for(int i=0 ; i< n ; i++){
+        if(take[i] != -1){
+            cout<<arr[i].index<<" ";
+        }
+    }
+
+
+
+
 }
